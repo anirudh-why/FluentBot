@@ -24,7 +24,8 @@ def correct_grammar(text):
 
 # Test directly
 if __name__ == "__main__":
-    sample_text = "He don't likes talking to peoples who judges him that's why he avoid them since long time."
-    corrected = correct_grammar(sample_text)
-    print("Original:", sample_text)
-    print("Corrected:", corrected)
+    while 1:
+        sample_text = input()
+        corrected = correct_grammar(sample_text)
+        print("Original:", sample_text)
+        print("Corrected:", corrected)

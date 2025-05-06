@@ -7,7 +7,7 @@ import warnings
 warnings.filterwarnings("ignore", message="FP16 is not supported on CPU")
 
 print("📥 Loading Whisper model...")
-model = whisper.load_model("medium")  # You can try "small" or "medium" for better accuracy
+model = whisper.load_model("small")  # You can try "small" or "medium" for better accuracy
 
 def transcribe_audio(file_path):
     print(f"📝 Transcribing {file_path}...")
