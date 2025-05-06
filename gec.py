@@ -1,29 +1,30 @@
-# gec.py
-
 from transformers import T5ForConditionalGeneration, T5Tokenizer
 import torch
 
-# Load pre-trained model and tokenizer
-model_name = "prithivida/grammar_error_correcter_v1"  # Pre-trained GEC model on HuggingFace
+# Load Vennify grammar correction model
+model_name = "vennify/t5-base-grammar-correction"
 model = T5ForConditionalGeneration.from_pretrained(model_name)
 tokenizer = T5Tokenizer.from_pretrained(model_name)
 
 def correct_grammar(text):
-    # Tokenize the input text
-    input_text = "grammar error correction: " + text
+    # Add grammar prefix for the model
+    input_text = "grammar: " + text
     inputs = tokenizer(input_text, return_tensors="pt", padding=True, truncation=True)
-    
-    # Generate the corrected sentence
+
     with torch.no_grad():
-        output = model.generate(inputs["input_ids"], num_beams=5, max_length=256, early_stopping=True)
-    
-    # Decode and return corrected text
-    corrected_text = tokenizer.decode(output[0], skip_special_tokens=True)
+        outputs = model.generate(
+            inputs["input_ids"],
+            max_length=256,
+            num_beams=5,
+            early_stopping=True
+        )
+
+    corrected_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
     return corrected_text
 
-# For testing directly
+# Test directly
 if __name__ == "__main__":
-    incorrect_text = "She go to school every day."
-    corrected = correct_grammar(incorrect_text)
-    print(f"Original Text: {incorrect_text}")
-    print(f"Corrected Text: {corrected}")
+    sample_text = "He don't likes talking to peoples who judges him that's why he avoid them since long time."
+    corrected = correct_grammar(sample_text)
+    print("Original:", sample_text)
+    print("Corrected:", corrected)
