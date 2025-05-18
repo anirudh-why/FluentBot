@@ -1,0 +1,45 @@
+/* Custom styles */
+.border-dashed {
+    border-style: dashed;
+}
+
+/* Drag and drop styles */
+.drag-over {
+    border-color: #4F46E5;
+    background-color: #EEF2FF;
+}
+
+/* Recording animation */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.recording {
+    animation: pulse 1.5s infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #F3F4F6;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #9CA3AF;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #6B7280;
+} 
